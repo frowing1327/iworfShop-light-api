@@ -1,0 +1,12 @@
+{
+  "MobileClient": {
+    "Key": "8f1f4c6e-0c52-4b64-9b47-6d8f78cde25a",
+    "Issuer": "iworfShopAPI",
+    "Audience": "iworfShopMobile"
+  },
+  "TestClient": {
+    "Key": "8f1f4c6e-0c52-4b64-9b47-6d8f78cde25a",
+    "Issuer": "iworfShopAPI",
+    "Audience": "iworfShopMobile"
+  }
+}
