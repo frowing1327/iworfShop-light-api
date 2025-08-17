@@ -1,0 +1,22 @@
+[
+  {
+    "Id": "9c3f28de-67a4-43f5-8a1e-62c05f2a7d33",
+    "Name": "UstGiyim",
+    "ParentName": "Erkek"
+  },
+  {
+    "Id": "d7a28f64-8b29-4baf-96a7-4c58e2a13f1b",
+    "Name": "AltGiyim",
+    "ParentName" : "Erkek"
+  },
+  {
+    "Id": "1f8b0f92-53a1-4b91-9e5f-bf2a04c7c442",
+    "Name": "Erkek",
+    "ParentName" : "Master"
+  },
+  {
+    "Id": "a2c98e76-3dfb-46c5-a9a7-74d8e15f8d5e",
+    "Name": "Master",
+    "ParentName" : ""
+  }
+]

@@ -3,7 +3,7 @@ using iworfShop_backend_light.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using StackExchange.Redis;
+using Microsoft.Extensions.Azure;
 
 SQLitePCL.Batteries.Init();
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +18,15 @@ builder.Services.AddDbContext<SqlLiteClient>(options =>
 builder.Services.AddScoped<JwtOptionsService>();
 //builder.Services.AddScoped<IRedisClient, RedisClient>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IServiceBus, ServiceBus>();
+//builder.Services.AddApplicationInsightsTelemetry();
+
+builder.Services.AddAzureClients(clients =>
+{
+    clients.AddServiceBusClient(builder.Configuration.GetConnectionString("ServiceBus"))
+        .WithName("servicebus_client");
+});
 
 builder.Services.AddAuthentication(options =>
 {

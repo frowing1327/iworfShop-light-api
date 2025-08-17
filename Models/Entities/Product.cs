@@ -9,6 +9,7 @@ public class Product
     public Brand Brand { get; set; }
     public string Description { get; set; }
     public Category Category { get; set; }
+    public string CategoryTree { get; set; }
     public string Gender { get; set; }
     public string Color { get; set; }
     public string ColorCode { get; set; }

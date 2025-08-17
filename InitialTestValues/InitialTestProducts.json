@@ -1,0 +1,38 @@
+[
+  {
+    "Id": "9c3f28de-67a4-43f5-8a1e-62c05f2a7d33",
+    "Sku": "UstGiyim",
+    "BaseSku": "UstGiyim",
+    "Name": "UstGiyim",
+    "Brand": {
+      "Id": "",
+      "Name": ""
+    },
+    "Description": "Erkek",
+    "Category": {
+      "Id": "",
+      "Name": ""
+    },
+    "CategoryTree": "",
+    "Gender": "",
+    "Color": "",
+    "ColorCode": "",
+    "Size": "",
+    "Price": "",
+    "OldPrice": "",
+    "ImageUrls": [
+      "",
+      ""
+    ],
+    "IsActive": 1,
+    "Tags": [
+      "",
+      ""
+    ],
+    "CustomValues": {
+      "Key1": "Value1",
+      "Key2": "Value2",
+      "Key3": "Value3"
+    }
+  }
+]

@@ -1,6 +1,8 @@
+using System.Text.Json;
 using iworfShop_backend_light.Common;
 using iworfShop_backend_light.Data;
 using iworfShop_backend_light.Models.Dtos;
+using iworfShop_backend_light.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace iworfShop_backend_light.Services;
@@ -12,6 +14,7 @@ public interface IProductService
     Task<QueryResult> DeleteProduct(int brandId, List<string> skus);
     Task<QueryResult> GetProducts(ProductSearchModel search);
     Task<QueryResult> ImportProducts(ProductImportModel import);
+    Task<QueryResult> ImportInitialTestValues();
 
 }
 
@@ -110,5 +113,39 @@ public class ProductService : IProductService
     public Task<QueryResult> ImportProducts(ProductImportModel import)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<QueryResult> ImportInitialTestValues()
+    {
+        try
+        {
+            var brandsFileStr = await File.ReadAllTextAsync("InitialTestValues/InitialTestBrands.json");
+            var brands = JsonSerializer.Deserialize<List<Brand>>(brandsFileStr);
+            _sqlLiteClient.Brands.AddRange(brands);
+            await _sqlLiteClient.SaveChangesAsync();
+
+            var categoriesFileStr = await File.ReadAllTextAsync("InitialTestValues/InitialTestBrands.json");
+            var categories = JsonSerializer.Deserialize<List<Category>>(categoriesFileStr);
+            _sqlLiteClient.Categories.AddRange(categories);
+            await _sqlLiteClient.SaveChangesAsync();
+
+            var productsFileStr = await File.ReadAllTextAsync("InitialTestValues/InitialTestBrands.json");
+            var products = JsonSerializer.Deserialize<List<Product>>(productsFileStr);
+            _sqlLiteClient.Products.AddRange(products);
+            await _sqlLiteClient.SaveChangesAsync();
+
+        }
+        catch (Exception e)
+        {
+            return new QueryResult
+            {
+                Code = IworfResultCode.Error, Data = null, 
+                IsSuccess = false, Message = "test verileri zortladığından mutakabil db'ye eklenemedi"
+            };
+        }
+
+        return new QueryResult 
+            { Code = IworfResultCode.Success, IsSuccess = true, Message = "sıkıntı yok dewam", Data = null };
+
     }
 }

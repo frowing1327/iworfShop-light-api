@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using iworfShop_backend_light.Common;
 using iworfShop_backend_light.Data;
+using iworfShop_backend_light.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +11,11 @@ namespace iworfShop_backend_light.Controller;
 [ApiController]
 public class TestController : IworfController
 {
-    private readonly IRedisClient  _redisClient;
-    public TestController(IRedisClient redisClient)
+    //private readonly IRedisClient  _redisClient;
+    private readonly IProductService _productService;
+    public TestController(IProductService productService)
     {
-        _redisClient = redisClient;
+        productService = _productService;
     }
 
     [Authorize]
@@ -27,17 +29,18 @@ public class TestController : IworfController
         return Success(message);
     }
 
-    [HttpGet("redisGetValue")]
-    public async Task<IActionResult> RedisGetValue(string key)
+    [HttpGet("importInitialTest")]
+    public async Task<IActionResult> ImportInitialTest()
     {
-        var result = await _redisClient.GetValueAsync(key);
-        return Success(result);
-    }
+        var result = await _productService.ImportInitialTestValues();
 
-    [HttpPost("redisSetValue")]
-    public async Task<IActionResult> RedisSetValue(string key, string value)
-    {
-        var result = await _redisClient.SetValueAsync(key, value);
-        return string.IsNullOrEmpty(result) ? Success("IYYEAHH") : Fail("tüh olmadı be");
+        if (result.IsSuccess)
+        {
+            return Success(result.Message);
+        }
+        else
+        {
+            return Fail(result.Message);
+        }
     }
 }
